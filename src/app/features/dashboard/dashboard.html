@@ -1,4 +1,19 @@
 <div class="container mx-auto px-4 py-8">
-  <h2 class="text-3xl font-bold text-gray-800 mb-6">Dashboard</h2>
-  <p class="text-gray-600">Transaction list will appear here...</p>
+  <!-- Page Header -->
+  <div class="mb-8">
+    <h1 class="text-4xl font-bold text-gray-800 mb-2">Dashboard</h1>
+    <p class="text-gray-600">Tổng quan tài chính của bạn</p>
+  </div>
+
+  <!-- Balance Cards -->
+  <app-balance-card
+    [balance]="stats.balance"
+    [income]="stats.income"
+    [expense]="stats.expense">
+  </app-balance-card>
+
+  <!-- Transaction List -->
+  <app-transaction-list
+    [transactions]="transactions">
+  </app-transaction-list>
 </div>

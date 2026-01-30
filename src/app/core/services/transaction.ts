@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { Transaction, BalanceStats, TransactionType } from '../models/transaction.model';
 
 
