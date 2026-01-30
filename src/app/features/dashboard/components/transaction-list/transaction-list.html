@@ -1,0 +1,43 @@
+<div class="bg-white rounded-lg shadow-md p-6">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-bold text-gray-800">Giao dịch gần đây</h2>
+    <span class="text-sm text-gray-500">{{ transactions.length }} giao dịch</span>
+  </div>
+
+  <!-- Empty State -->
+  @if (transactions.length === 0) {
+    <div class="text-center py-12">
+      <div class="text-6xl mb-4">📭</div>
+      <p class="text-gray-500 text-lg">Chưa có giao dịch nào</p>
+      <p class="text-gray-400 text-sm mt-2">Hãy thêm giao dịch đầu tiên của bạn!</p>
+    </div>
+  }
+
+  <!-- Transaction List -->
+  @else {
+    <div class="space-y-3">
+      @for (transaction of transactions; track transaction.id) {
+        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+          <!-- Left-->
+          <div class="flex items-center space-x-4">
+            <div>
+              <p class="text-sm text-gray-500">{{ transaction.note }}</p>
+              <p class="text-xs text-gray-400 mt-1">
+                {{ transaction.date | date:'dd/MM/yyyy' }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Right -->
+          <div class="text-right">
+            <p class="text-xl font-bold"
+               [ngClass]="transaction.type === 'income' ? 'text-green-600' : 'text-red-600'">
+              {{ transaction.type === 'income' ? '+' : '-' }}
+              {{ transaction.amount | currency:'VND':'symbol':'1.0-0' }}
+            </p>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
