@@ -1,5 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject, computed } from '@angular/core';
 import { TransactionService } from '../../core/services/transaction';
 import { Transaction, BalanceStats } from '../../core/models/transaction.model';
 import { BalanceCard } from './components/balance-card/balance-card';
@@ -15,30 +14,32 @@ import { TransactionList } from './components/transaction-list/transaction-list'
 
 export class Dashboard implements OnInit {
   // Inject service
-  private transactionService = inject(TransactionService);
-
-  // Component properties
-  public transactions: Transaction[] = [];
-  public stats: BalanceStats = {
-    balance: 0,
-    income: 0,
-    expense: 0
-  };
+  transactionService = inject(TransactionService);
+  // State management
+  isLoading = true;
+  error: string | null = null;
+  
+  // Use signals directly from service instead of copying to component properties
+  transactions = this.transactionService.transactions;
+  stats = this.transactionService.stats;
 
   ngOnInit(): void {
-    this.loadTransactions();
+    this.loadData();
   }
 
-  /**
-   * Load transactions từ service
-   * Phase 2: Lấy mock data trực tiếp
-   * Phase 3: Sẽ refactor thành async call
-   */
-  loadTransactions(): void {
-    // Lấy danh sách giao dịch
-    this.transactions = this.transactionService.getTransactions();
+  loadData(): void {
+    this.isLoading = true;
+    this.error = null;
     
-    // Tính toán thống kê
-    this.stats = this.transactionService.calculateStats(this.transactions);
+    this.transactionService.loadTransactions().subscribe({
+      next: () => {
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.error = 'Không thể tải dữ liệu. Vui lòng thử lại!';
+        this.isLoading = false;
+        console.error('Error loading transactions:', error);
+      }
+    });
   }
 }
