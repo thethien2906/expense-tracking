@@ -1,0 +1,100 @@
+{
+  "transactions": [
+    {
+      "id": "1",
+      "amount": 5000000,
+      "date": "2026-01-15T00:00:00.000Z",
+      "note": "Lương tháng 1",
+      "categoryId": 1,
+      "type": "income"
+    },
+    {
+      "id": "2",
+      "amount": 500000,
+      "date": "2026-01-16T00:00:00.000Z",
+      "note": "Ăn tối nhà hàng",
+      "categoryId": 2,
+      "type": "expense"
+    },
+    {
+      "id": "3",
+      "amount": 200000,
+      "date": "2026-01-17T00:00:00.000Z",
+      "note": "Xăng xe",
+      "categoryId": 3,
+      "type": "expense"
+    },
+    {
+      "id": "4",
+      "amount": 1500000,
+      "date": "2026-01-18T00:00:00.000Z",
+      "note": "Thưởng dự án",
+      "categoryId": 1,
+      "type": "income"
+    },
+    {
+      "id": "5",
+      "amount": 800000,
+      "date": "2026-01-19T00:00:00.000Z",
+      "note": "Mua sách kỹ thuật",
+      "categoryId": 4,
+      "type": "expense"
+    },
+    {
+      "id": "6",
+      "amount": 2000000,
+      "date": "2026-01-20T00:00:00.000Z",
+      "note": "Freelance project",
+      "categoryId": 1,
+      "type": "income"
+    },
+    {
+      "id": "7",
+      "amount": 300000,
+      "date": "2026-01-22T00:00:00.000Z",
+      "note": "Cắt tóc & spa",
+      "categoryId": 5,
+      "type": "expense"
+    },
+    {
+      "id": "8",
+      "amount": 150000,
+      "date": "2026-01-25T00:00:00.000Z",
+      "note": "Cafe làm việc",
+      "categoryId": 2,
+      "type": "expense"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Thu nhập",
+      "icon": "💰",
+      "type": "income"
+    },
+    {
+      "id": 2,
+      "name": "Ăn uống",
+      "icon": "🍔",
+      "type": "expense"
+    },
+    {
+      "id": 3,
+      "name": "Di chuyển",
+      "icon": "🚗",
+      "type": "expense"
+    },
+    {
+      "id": 4,
+      "name": "Giáo dục",
+      "icon": "📚",
+      "type": "expense"
+    },
+    {
+      "id": 5,
+      "name": "Sức khỏe",
+      "icon": "💊",
+      "type": "expense"
+    }
+  ]
+}
