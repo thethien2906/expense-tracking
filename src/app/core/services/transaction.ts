@@ -55,4 +55,34 @@ export class TransactionService {
     const transactions = this.transactionsSignal();
     return this.calculateStats(transactions);
   });
+
+  getTransactionById(id: string): Observable<Transaction> {
+    return this.http.get<Transaction>(`${this.apiUrl}/transactions/${id}`)
+      .pipe(
+        tap(transaction => console.log('Loaded transaction:',transaction))
+      );
+  }
+  addTransaction(transaction: Omit<Transaction, 'id'>): Observable<Transaction> {
+    return this.http.post<Transaction>(`${this.apiUrl}/transactions`, transaction)
+      .pipe(
+        tap(newTransaction => {
+          console.log('Transaction added:', newTransaction);
+          const currentTransactions = this.transactionsSignal();
+          this.transactionsSignal.set([newTransaction, ...currentTransactions])
+        })
+      )
+  }
+  updateTransaction(id: string, transaction: Partial<Transaction>): Observable<Transaction> {
+    return this.http.put<Transaction>(`${this.apiUrl}/transactions/${id}`, transaction)
+      .pipe(
+        tap(updatedTransaction => {
+          console.log('Transaction updated:', updatedTransaction);
+          const currentTransactions = this.transactionsSignal();
+          const updatedList = currentTransactions.map(t =>
+            t.id === id ? updatedTransaction : t
+          );
+          this.transactionsSignal.set(updatedList)
+        })
+      )
+  }
 }
